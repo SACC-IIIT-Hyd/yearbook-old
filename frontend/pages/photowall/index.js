@@ -1,1 +1,0 @@
-// Page for the photo wall; View all photos people have uploaded
