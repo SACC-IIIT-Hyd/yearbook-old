@@ -1,3 +1,7 @@
-sacc
-frontend/package-lock.json
-frontend/.eslintrc.json
+.env
+__pycache__/
+.DS_Store
+MACOSX/
+venv/
+.venv/
+.vscode/
