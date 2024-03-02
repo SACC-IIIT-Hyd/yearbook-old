@@ -1,6 +1,10 @@
 @font-face {
-    font-family: "ProtestRiot";
-    src: url("/fonts/ProtestRiot.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
+  font-family: "ProtestRiot";
+  src: url("/fonts/ProtestRiot.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';

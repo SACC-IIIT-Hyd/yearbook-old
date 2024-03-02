@@ -6,13 +6,18 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "clean": "rm -rf .next",
+    "rebuild-start": "npm run clean && npm run build && npm start"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^5.0.8",
+    "@mui/icons-material": "^5.15.10",
     "@mui/material": "^5.15.9",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.10",
     "next": "^14.1.0",
     "react": "^18",
     "react-dom": "^18"
@@ -21,8 +26,12 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.17",
     "eslint": "8.56.0",
     "eslint-config-next": "14.1.0",
+    "postcss": "^8.4.35",
+    "postcss-cli": "^11.0.0",
+    "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
 }

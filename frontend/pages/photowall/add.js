@@ -1,7 +1,8 @@
-// Page to edit a testimonial; View all testimonials you've written
+// Page to add a photo to the photo wall
+
 import React from 'react';
 
-const EditTestimonial = () => {
+const AddPage = () => {
     return (
         <div>
             <h1>Welcome to the SACC Yearbook</h1>
@@ -10,4 +11,4 @@ const EditTestimonial = () => {
     );
 };
 
-export default EditTestimonial;
+export default AddPage;
