@@ -25,8 +25,8 @@ def login_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         token = None
-        if request.cookies.get("Authorization"):
-            token = request.cookies.get("Authorization")
+        if request.cookies.get("Authorization_YearBook"):
+            token = request.cookies.get("Authorization_YearBook")
         if not token:
             return redirect(url_for("login"))
         try:
@@ -46,8 +46,8 @@ def login_required(f):
 def verify_token() -> bool:
     try:
         token = None
-        if request.cookies.get("Authorization"):
-            token = request.cookies.get("Authorization")
+        if request.cookies.get("Authorization_YearBook"):
+            token = request.cookies.get("Authorization_YearBook")
         if token:
             current_user = decode(token, JWT_SECRET_KEY, algorithms=["HS256"])
             return True
@@ -59,7 +59,7 @@ def verify_token() -> bool:
 @blueprint.route("/login")
 def login():
     # Already logged in
-    if request.cookies.get("Authorization"):
+    if request.cookies.get("Authorization_YearBook"):
         return redirect(REDIRECT_URL)
 
     next = request.args.get("next")
@@ -105,7 +105,7 @@ def login():
         # send JWT as cookie
         response = make_response(redirect(next))
         response.set_cookie(
-            "Authorization",
+            "Authorization_YearBook",
             token,
             httponly=True,
             secure=False,  # TODO: change in prod
@@ -128,7 +128,7 @@ def logout():
 def logout_callback():
     # Expire cookie
     response = make_response()
-    response.set_cookie("Authorization", "", expires=0)
+    response.set_cookie("Authorization_YearBook", "", expires=0)
     response.set_cookie("logout", "", expires=0)
 
     # app.debug(response.headers)
