@@ -116,7 +116,6 @@ def login():
         response.headers["Access-Control-Allow-Origin"] = "*"
         response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
         response.headers["Access-Control-Allow-Headers"] = "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
-        response.status_code = 200
 
         return response
 
@@ -137,8 +136,6 @@ def logout_callback():
     response = make_response()
     response.set_cookie("Authorization_YearBook", "", expires=0)
     response.set_cookie("logout", "", expires=0)
-
-    # app.debug(response.headers)
 
     # Redirect from CAS logout request after logout successful
     return response
