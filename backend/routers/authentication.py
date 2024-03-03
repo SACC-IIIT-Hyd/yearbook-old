@@ -13,6 +13,7 @@ JWT_SECRET_KEY = getenv("JWT_SECRET_KEY", "jwt-secret")
 
 blueprint = Blueprint("authentication", __name__)
 
+
 # instantiate CAS client
 cas_client = CASClient(
     version=3,
@@ -28,7 +29,7 @@ def login_required(f):
         if request.cookies.get("Authorization_YearBook"):
             token = request.cookies.get("Authorization_YearBook")
         if not token:
-            return redirect(url_for("login"))
+            return redirect(url_for("api.authentication.login"))
         try:
             current_user = decode(token, JWT_SECRET_KEY, algorithms=["HS256"])
         except Exception as e:
@@ -62,7 +63,7 @@ def login():
     if request.cookies.get("Authorization_YearBook"):
         return redirect(REDIRECT_URL)
 
-    next = request.args.get("next")
+    next_url = request.args.get("next")
     ticket = request.args.get("ticket")
     if not ticket:
         # No ticket, the request come from end user, send to CAS login
@@ -103,7 +104,7 @@ def login():
         token = encode(payload, JWT_SECRET_KEY, algorithm="HS256")
 
         # send JWT as cookie
-        response = make_response(redirect(next))
+        response = make_response(redirect(next_url))
         response.set_cookie(
             "Authorization_YearBook",
             token,
@@ -111,13 +112,19 @@ def login():
             secure=False,  # TODO: change in prod
             max_age=86400,  # 1 day
         )
+        response.headers["Access-Control-Allow-Credentials"] = "true"
+        response.headers["Access-Control-Allow-Origin"] = "*"
+        response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+        response.headers["Access-Control-Allow-Headers"] = "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+        response.status_code = 200
 
         return response
 
 
 @blueprint.route("/logout")
 def logout():
-    redirect_url = url_for("api.authentication.logout_callback", _external=True)
+    redirect_url = url_for(
+        "api.authentication.logout_callback", _external=True)
     cas_logout_url = cas_client.get_logout_url(redirect_url)
     # app.debug("CAS logout URL: %s", cas_logout_url)
 

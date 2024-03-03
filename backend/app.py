@@ -13,9 +13,11 @@ api = Blueprint('api', __name__, url_prefix='/api')
 api.register_blueprint(authentication_blueprint)
 api.register_blueprint(trial_blueprint)
 
+
 @api.route("/")
 def index():
     return "Hello, World!"
+
 
 app.register_blueprint(api)
 app.secret_key = SECRET_KEY
