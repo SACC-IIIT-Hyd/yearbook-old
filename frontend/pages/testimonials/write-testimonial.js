@@ -35,7 +35,7 @@ const WriteTestimonial = () => {
     setContent('');
     console.log(dummy_testimonials)
     // Show success message or redirect to another page
-    router.push('/testimonials/my-testimonials');
+    router.push('/testimonials');
   };
 
   return (
