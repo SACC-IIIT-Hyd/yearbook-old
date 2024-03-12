@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# cd frontend
-# npm install
-# cd ..
+cd frontend
+npm install
+cd ..
 
 docker compose up --build
 
