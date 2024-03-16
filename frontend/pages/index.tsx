@@ -5,24 +5,17 @@ const index = () => {
   return (
     <main >
       <section className={styles.main}>
-
-        <div className={styles.mainContent}>
-          <div className={styles.content}>
-            <div className={styles.content_head}>
-              Lets make the <span className={styles.yearbook_text}>
-                <span className={styles.red}>yea</span><span className={styles.blue}>rbo</span><span className={styles.yellow}>ok</span>
-                </span> fun this year
+          <div className={styles.mainContainer}>
+            <div className={styles.mainHeading}>
+              YEARBOOK
+              {/* <span className={styles.red}>YEA</span><span className={styles.blue}>RB</span><span className={styles.yellow}>OOK</span> */}
             </div>
-            <div className={styles.content_body}>
-
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit laborum adipisci vel alias repellat. Eos minima, in aliquid laudantium a nam repellat aliquam cum fugit ex nulla obcaecati et vero eligendi esse aperiam dolores totam incidunt dolorum consequuntur voluptatem eveniet distinctio! Asperiores cumque accusantium rerum labore fuga voluptatibus eveniet, facilis consequuntur beatae hic maxime modi. Deserunt, ad ea vero nostrum mollitia incidunt quae ex sit molestiae magni dolore accusamus earum cum molestias adipisci animi exercitationem possimus illum. Possimus earum ad vel? Adipisci repellat commodi autem rerum est iusto earum fugit, aperiam veniam aliquid perferendis consequuntur corrupti impedit eligendi vero fuga!
+            <div className={styles.mainContent}>
+            As you reach the end of your college journey, we reflect on the memories you've made, the friendships you've forged, and the futures that lie ahead. Yearbook is the place where you can post crazy pictures, write interesting captions and generate creative polls for yourselves and your friends. You may be moving on to different paths, but the bonds you've formed will stay forever. Give a shot to cherishing these priceless bonds and reliving the most iconic days of your college life through this initiative of SARC, curated just for you!
             </div>
+
           </div>
-
-        </div>
-        <div className={styles.sideImage}>
-          <h1>YEARBOOK</h1>
-        </div>
+         
       </section>
 
       <div className={styles.video_area} >
