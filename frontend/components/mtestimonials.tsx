@@ -81,25 +81,27 @@ const BasicCard = () => {
 
   return (
     <Box>
-        <Typography 
-          paddingTop={"3rem"} 
-          variant="h2" 
-          align="center" 
-          sx={{ 
-            fontFamily: "GabrielWeissFriends", 
-            background: 'linear-gradient(45deg, #e09223 30%, #f600bb 90%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-          }} 
-          gutterBottom
-        >
-          Your Testimonials
-        </Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 3 }}>
-    
-            <Button variant="contained" onClick={handleSaveClick} disabled={!isDropCalled} sx={{ '&:hover': {backgroundColor: 'transparent',color: '#e4783e', border: !isDropCalled ? 'none' : "1px solid #e4783e",}, backgroundColor: 'transparent',color:"#e85b5d", fontSize:"larger", border: !isDropCalled ? 'none' : "1px solid #e85b5d"}}>
-                Save
-            </Button>
+        <Box sx={{ position: 'sticky', top: 15, zIndex: 1, background: "#0C0018" }}>
+          <Typography 
+            paddingTop={"3rem"} 
+            variant="h2" 
+            align="center" 
+            sx={{ 
+              fontFamily: "GabrielWeissFriends", 
+              background: 'linear-gradient(45deg, #e09223 30%, #f600bb 90%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }} 
+            gutterBottom
+          >
+            Your Testimonials
+          </Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 3 }}>
+      
+              <Button variant="contained" onClick={handleSaveClick} disabled={!isDropCalled} sx={{ '&:hover': {backgroundColor: 'transparent',color: '#e4783e', border: !isDropCalled ? 'none' : "1px solid #e4783e",}, backgroundColor: 'transparent',color:"#e85b5d", fontSize:"larger", marginBottom: 2, border: !isDropCalled ? 'none' : "1px solid #e85b5d"}}>
+                  Save
+              </Button>
+          </Box>
         </Box>
         <Grid container justifyContent="center" alignItems="center" spacing={2} marginBlockStart={4} paddingLeft={65} paddingRight={65}>
         {cards.map((card, index) => (
