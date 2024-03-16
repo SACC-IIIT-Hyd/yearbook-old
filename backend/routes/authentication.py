@@ -11,6 +11,8 @@ SERVICE_URL = getenv("SERVICE_URL")
 REDIRECT_URL = getenv("REDIRECT_URL", "/home")
 JWT_SECRET_KEY = getenv("JWT_SECRET_KEY", "jwt-secret")
 
+print(CAS_SERVER_URL, SERVICE_URL, REDIRECT_URL, JWT_SECRET_KEY)
+
 blueprint = Blueprint("authentication", __name__)
 
 # instantiate CAS client
@@ -28,7 +30,7 @@ def login_required(f):
         if request.cookies.get("Authorization_YearBook"):
             token = request.cookies.get("Authorization_YearBook")
         if not token:
-            return redirect(url_for("login"))
+            return redirect(url_for("api.authentication.login"))
         try:
             current_user = decode(token, JWT_SECRET_KEY, algorithms=["HS256"])
         except Exception as e:
@@ -38,8 +40,10 @@ def login_required(f):
                 "error": str(e),
             }, 500
 
+        print(current_user)
         return f(current_user, *args, **kwargs)
 
+    print(decorated)
     return decorated
 
 
@@ -50,7 +54,8 @@ def verify_token() -> bool:
             token = request.cookies.get("Authorization_YearBook")
         if token:
             current_user = decode(token, JWT_SECRET_KEY, algorithms=["HS256"])
-            return True
+            if current_user:
+                return True
         return False
     except Exception as e:
         return False
@@ -62,7 +67,7 @@ def login():
     if request.cookies.get("Authorization_YearBook"):
         return redirect(REDIRECT_URL)
 
-    next = request.args.get("next")
+    next_url = request.args.get("next")
     ticket = request.args.get("ticket")
     if not ticket:
         # No ticket, the request come from end user, send to CAS login
@@ -103,7 +108,7 @@ def login():
         token = encode(payload, JWT_SECRET_KEY, algorithm="HS256")
 
         # send JWT as cookie
-        response = make_response(redirect(next))
+        response = make_response(redirect(next_url))
         response.set_cookie(
             "Authorization_YearBook",
             token,
@@ -117,7 +122,8 @@ def login():
 
 @blueprint.route("/logout")
 def logout():
-    redirect_url = url_for("api.authentication.logout_callback", _external=True)
+    redirect_url = url_for(
+        "api.authentication.logout_callback", _external=True)
     cas_logout_url = cas_client.get_logout_url(redirect_url)
     # app.debug("CAS logout URL: %s", cas_logout_url)
 
