@@ -25,7 +25,6 @@ class ProfileDetails(db.Model):
     q4 = db.Column(db.String(500))
     q5 = db.Column(db.String(500))
     q6 = db.Column(db.String(500))
-    nick_name = db.Column(db.String(80))
     post_graduation = db.Column(db.String(500))
     tagline = db.Column(db.String(500))
     clubs = db.Column(db.String(500))
@@ -37,6 +36,7 @@ class UserDetails(db.Model):
     type_of_degree = db.Column(db.String(50))
     year_of_joining = db.Column(db.String(20))
     branch = db.Column(db.String(50))
+    nick_name = db.Column(db.String(80))
 
 class Media(db.Model):
     sacc_id = db.Column(db.String, db.ForeignKey('user.id'))

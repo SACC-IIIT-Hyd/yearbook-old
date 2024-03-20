@@ -39,9 +39,9 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="flex items-center gap-6">
-          <button className="bg-primary-blue text-white px-5 py-2  hover:bg-[#87acec]" onClick={toggleMenu}>Log In</button>
+          <button className="bg-primary-blue text-white px-5 py-2  hover:bg-[#87acec]" ><a href='/api/login'>Log In </a></button>
           <Button variant="outlined" startIcon={<MenuIcon />} onClick={toggleMenu} className="text-3xl cursor-pointer md:hidden"></Button>
-          
+
         </div>
       </nav>
     </header>

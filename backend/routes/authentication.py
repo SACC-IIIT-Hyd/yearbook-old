@@ -1,4 +1,4 @@
-from flask import Blueprint, request, redirect, url_for, make_response
+from flask import Blueprint, request, redirect, url_for, make_response, jsonify
 from flask import current_app as app
 from urllib.parse import quote_plus
 from functools import wraps
@@ -11,8 +11,6 @@ SERVICE_URL = getenv("SERVICE_URL")
 REDIRECT_URL = getenv("REDIRECT_URL", "/home")
 JWT_SECRET_KEY = getenv("JWT_SECRET_KEY", "jwt-secret")
 
-print(CAS_SERVER_URL, SERVICE_URL, REDIRECT_URL, JWT_SECRET_KEY)
-
 blueprint = Blueprint("authentication", __name__)
 
 # instantiate CAS client
@@ -22,36 +20,35 @@ cas_client = CASClient(
     server_url=CAS_SERVER_URL,
 )
 
+# Assuming these constants are defined somewhere in your application
+AUTH_COOKIE_NAME = "Authorization_YearBook"
+LOGIN_ENDPOINT = "api.authentication.login"
+
 
 def login_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
-        token = None
-        if request.cookies.get("Authorization_YearBook"):
-            token = request.cookies.get("Authorization_YearBook")
+        token = request.cookies.get(AUTH_COOKIE_NAME)
         if not token:
-            return redirect(url_for("api.authentication.login"))
+            # Redirect to the login page if token is not present
+            return redirect(url_for(LOGIN_ENDPOINT))
+
         try:
             current_user = decode(token, JWT_SECRET_KEY, algorithms=["HS256"])
         except Exception as e:
-            return {
-                "message": "Something went wrong",
-                "data": None,
-                "error": str(e),
-            }, 500
+            return jsonify({"message": "Authentication failed", "error": str(e)}), 401
 
-        print(current_user)
+        # Call the original function with current user and any additional arguments
         return f(current_user, *args, **kwargs)
 
-    print(decorated)
     return decorated
 
 
 def verify_token() -> bool:
     try:
         token = None
-        if request.cookies.get("Authorization_YearBook"):
-            token = request.cookies.get("Authorization_YearBook")
+        if request.cookies.get(AUTH_COOKIE_NAME):
+            token = request.cookies.get(AUTH_COOKIE_NAME)
         if token:
             current_user = decode(token, JWT_SECRET_KEY, algorithms=["HS256"])
             if current_user:
@@ -64,7 +61,7 @@ def verify_token() -> bool:
 @blueprint.route("/login")
 def login():
     # Already logged in
-    if request.cookies.get("Authorization_YearBook"):
+    if request.cookies.get(AUTH_COOKIE_NAME):
         return redirect(REDIRECT_URL)
 
     next_url = request.args.get("next")
@@ -73,7 +70,17 @@ def login():
         # No ticket, the request come from end user, send to CAS login
         cas_login_url = cas_client.get_login_url()
         # app.debug("CAS login URL: %s", type(cas_login_url))
-        return redirect(cas_login_url)
+
+        response = redirect(cas_login_url)
+
+        # Add CORS headers to the response
+        response.headers.add('Access-Control-Allow-Origin', 'login.iiit.ac.in')
+        response.headers.add('Access-Control-Allow-Headers', '*')
+        response.headers.add('Access-Control-Allow-Methods', 'GET POST')
+        response.headers.add('Access-Control-Allow-Credentials', 'true')
+
+        print(response.headers)
+        return response
 
     # There is a ticket, the request come from CAS as callback.
     # need call `verify_ticket()` to validate ticket and get user profile.
@@ -110,12 +117,13 @@ def login():
         # send JWT as cookie
         response = make_response(redirect(next_url))
         response.set_cookie(
-            "Authorization_YearBook",
+            AUTH_COOKIE_NAME,
             token,
             httponly=True,
             secure=False,  # TODO: change in prod
             max_age=86400,  # 1 day
         )
+        response.set_cookie("login", "true")
 
         return response
 
@@ -134,7 +142,7 @@ def logout():
 def logout_callback():
     # Expire cookie
     response = make_response()
-    response.set_cookie("Authorization_YearBook", "", expires=0)
+    response.set_cookie(AUTH_COOKIE_NAME, "", expires=0)
     response.set_cookie("logout", "", expires=0)
 
     # app.debug(response.headers)

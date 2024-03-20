@@ -7,6 +7,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 
+import Auth from '../src/auth';
+import { Link } from '@mui/material';
+import { red } from '@mui/material/colors';
 
 
 const user_details = () => {
@@ -44,6 +47,50 @@ const user_details = () => {
   // ****************************************************
 
 
+  const { auth, fetchCookie } = Auth();
+
+  const submitProfile = () => {
+    // call useEffect of auth
+    fetchCookie()
+
+    console.log("submitting profile")
+    console.log("auth: ", auth)
+    
+    if (!auth) {
+      // redirect to login
+      alert("Please login to submit profile")
+      return
+
+    }
+    console.log("submitting profile")
+
+    fetch('http://localhost:3000/api/profile/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(
+        {
+          "email1": "amey.k@iiit.ac.in",
+          "email2": "amek@gmail.com",
+          "phone": "7904735718",
+          "home": "Cbe",
+          "dob": "2005-12-31",
+          "degree_type": "Btech",
+          "join_year": "2022",
+          "nick_name": "Minor",
+          "branch": "CSD"
+        }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+        alert("Profile submitted successfully")
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
 
 
 
@@ -169,13 +216,13 @@ const user_details = () => {
               label="Branch"
               defaultValue="..."
             />
-            
+
             <input id="dob" type="date" />
 
           </div>
 
           <div className={styles.detailSection4}>
-          <Button variant="outlined">Submit</Button>
+            <Button variant="outlined" onClick={submitProfile}>Submit</Button>
 
           </div>
         </div>
