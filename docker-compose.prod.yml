@@ -4,16 +4,16 @@ volumes:
     mysql-data:
 
 services:
-    sql:
-        image: mysql:8.3
-        restart: unless-stopped
-        env_file:
-            - ./.env
-        volumes:
-            - mysql-data:/var/lib/mysql
-        # ports:
-        #     - 3306:3306
-        authentication-plugin: mysql_native_password
+    # sql:
+    #     image: mysql:8.3
+    #     restart: unless-stopped
+    #     env_file:
+    #         - ./.env
+    #     volumes:
+    #         - mysql-data:/var/lib/mysql
+    #     # ports:
+    #     #     - 3306:3306
+    #     authentication-plugin: mysql_native_password
     
     backend:
         build:
@@ -21,8 +21,8 @@ services:
         env_file:
             - ./.env
         tty: true
-        depends_on:
-            - sql
+        # depends_on:
+        #     - sql
 
     frontend:
         build:
