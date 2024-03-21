@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
-import styles from '../styles/aboutme.module.css';
+import styles from '../styles/about.module.css';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
-// import VisuallyHiddentextarea from './VisuallyHiddentextarea';
+// import VisuallyHiddenInput from './VisuallyHiddenInput';
 import EditIcon from '@mui/icons-material/Edit';
 import Stack from '@mui/material/Stack';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
-import Link from 'next/link';
 
 
 
@@ -17,11 +16,11 @@ import Link from 'next/link';
 const about = () => {
     const handleEditClick = () => {
 
-        const textareas = document.querySelectorAll('textarea');
+        const inputs = document.querySelectorAll('input');
 
-        // Loop through each textarea element and remove the 'disabled' attribute
-        textareas.forEach(textarea => {
-            textarea.removeAttribute('disabled');
+        // Loop through each input element and remove the 'disabled' attribute
+        inputs.forEach(input => {
+            input.removeAttribute('disabled');
         });
     };
 
@@ -52,8 +51,7 @@ const about = () => {
 
                     <div className={styles.profile}>
                     <Stack direction="row" spacing={2}>
-
-                           <Button variant="contained"className={styles.profileEdit}endIcon={<EditIcon />} >
+                            <Button variant="contained" className={styles.profileEdit}endIcon={<EditIcon />} >
                                
                             </Button>
                         </Stack>
@@ -80,57 +78,62 @@ const about = () => {
                         </Stack>
                         <div className={styles.queAns}>
                             <class className={styles.que}>
-                                Q1 My first day in campus
+                                Q1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, quisquam.
                             </class>
 
-                            <textarea disabled className={styles.ans} type="text" placeholder='Amazing' />
+                            <input disabled className={styles.ans} type="text" placeholder='...' />
                         </div>
                         <div className={styles.queAns}>
                             <class className={styles.que}>
-                                Q2 
-                                My favorite campus memory
+                                Q1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, quisquam.
                             </class>
 
-                            <textarea disabled className={styles.ans} type="text" placeholder='Felicity' />
+                            <input disabled className={styles.ans} type="text" placeholder='...' />
                         </div>
                         <div className={styles.queAns}>
                             <class className={styles.que}>
-                                Q3 One thing you will miss the most
+                                Q1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, quisquam.
                             </class>
 
-                            <textarea disabled className={styles.ans} type="text" placeholder='JC' />
+                            <input disabled className={styles.ans} type="text" placeholder='...' />
                         </div>
                         <div className={styles.queAns}>
                             <class className={styles.que}>
-                                Q4 Best thing you learned from here
+                                Q1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, quisquam.
                             </class>
 
-                            <textarea disabled className={styles.ans} type="text" placeholder='Time management' />
+                            <input disabled className={styles.ans} type="text" placeholder='...' />
                         </div>
                         <div className={styles.queAns}>
                             <class className={styles.que}>
-                                Q5 My favorite place in campus and my favorite prof
+                                Q1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, quisquam.
                             </class>
 
-                            <textarea disabled className={styles.ans} type="text" placeholder='BBC and Prof. PJN' />
+                            <input disabled className={styles.ans} type="text" placeholder='...' />
                         </div>
-                       
+                        <div className={styles.queAns}>
+                            <class className={styles.que}>
+                                Q1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, quisquam.
+                            </class>
+
+                            <input disabled className={styles.ans} type="text" placeholder='...' />
+                        </div>
 
 
                     </div>
                     <div className={styles.extraQueArea}>
                         <div className={styles.extraQueAns}>
                             <span>After IIIT???</span>
-                            <textarea disabled type="text" />
+                            <input disabled type="text" />
                         </div>
                         <div className={styles.extraQueAns}>
                             <span>CLUBS</span>
-                            <textarea disabled type="text" />
+                            <input disabled type="text" />
 
                         </div>
                         <div className={styles.extraQueAns}>
                             <span>Achievements</span>
-                            <textarea disabled type="text" />
+                            <input disabled type="text" />
 
                         </div>
                     </div>
@@ -139,7 +142,7 @@ const about = () => {
                         <div><img src={images[0]} alt="" /></div>
                         <div><img src={images[1]} alt="" /></div>
                         <div><img src={images[2]} alt="" /></div>
-                        <textarea
+                        <input
                             accept="image/*"
                             style={{ display: 'none' }}
                             id="contained-button-file"
