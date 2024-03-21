@@ -47,7 +47,7 @@ const user_details = () => {
 
 
   useEffect(() => {
-    fetch('http://localhost/api/profile', {
+    fetch('http://yearbook-sacc.iiit.ac.in/api/profile', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -163,7 +163,7 @@ const user_details = () => {
     // }
     console.log("submitting profile")
 
-    fetch('http://localhost/api/profile/add', {
+    fetch('http://yearbook-sacc.iiit.ac.in/api/profile/add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
