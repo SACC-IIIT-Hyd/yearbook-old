@@ -28,10 +28,7 @@ const index = () => {
       <div className={styles.video_area} >
         <h3>A Walkthrough of the platform </h3><div className={styles.video_area_head}></div>
         <div className={styles.video_container}>
-          <iframe
-           src="https://www.youtube.com/embed/eGVCFS34zbY" title="Yearbook Portal 2022 Walkthrough"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" >
-
-           </iframe>
+        <iframe width="1280" height="720" src="https://www.youtube.com/embed/1H9lFm4pRxA" title="IIITH Campus" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
 
         </div>
       </div>
