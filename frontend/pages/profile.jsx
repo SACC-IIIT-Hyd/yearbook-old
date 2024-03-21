@@ -69,8 +69,13 @@ const user_details = () => {
             <button onClick={handleButtonClick}>+</button>
 
           </div>
+          <TextField
+            required
+            id="outlined-required"
+            label="Nickname"
+            placeholder='@joey'
+          />
 
-          <TextField id="standard-basic" label="Tagline" variant="standard" defaultValue="...." />
 
 
 
@@ -96,6 +101,11 @@ const user_details = () => {
               }}
               variant="standard"
             />
+
+
+          </div>
+          <div className={styles.detailSection5}>
+
             <TextField
               id="standard-read-only-input"
               label="College email"
@@ -104,38 +114,57 @@ const user_details = () => {
                 readOnly: true,
               }}
               variant="standard"
-            />
-
-
-          </div>
-          <div className={styles.detailSection2}>
-            <TextField
-              required
-              id="outlined-required"
-              label="Nickname"
-              defaultValue="..."
+              fullWidth
             />
             <TextField
               required
               id="outlined-required"
               label="Personal email"
-              defaultValue="..."
+              placeholder='joey.trib@xyz.com'
+              fullWidth
             />
+
+          </div>
+          <div className={styles.detailSection2}>
+
             <TextField
               required
               id="outlined-required"
               label="Whatsapp no."
-              defaultValue="..."
+              placeholder='xxxxxxxxxx'
             />
             <TextField
 
               id="outlined-required"
-              label="Alternate no."
-              defaultValue="..."
+              label="Instagram"
+              placeholder='itzjoey'
+              
+            />
+            <TextField
+
+              id="outlined-required"
+              label="LinkedIn"
+              placeholder='itzjoey'
+              
+            />
+            <TextField
+              sx={{ gridColumnStart: '1', gridColumnEnd: '4' }}
+              required
+              id="outlined-required"
+              label="Tagline"
+              placeholder='...'
+              fullWidth
             />
 
           </div>
-          <div className={styles.detailSection3}>
+
+          <div className={styles.detailSection6}>
+            <TextField
+              required
+              id="outlined-required"
+              label="Year of joining"
+              placeholder='eg. 2020'
+            />
             <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
               <InputLabel id="demo-select-small-label">Degree</InputLabel>
               <Select
@@ -148,34 +177,42 @@ const user_details = () => {
               >
 
                 <MenuItem value={"BTech"}>BTech</MenuItem>
+                <MenuItem value={"BTech+MS"}>MS</MenuItem>
                 <MenuItem value={"BTech+MS"}>BTech+MS</MenuItem>
                 <MenuItem value={"MTech"}>MTech</MenuItem>
                 <MenuItem value={"PHD"}>PHD</MenuItem>
               </Select>
             </FormControl>
-
-
-
-            <TextField
-              required
-              id="outlined-required"
-              label="Year of joining"
-              defaultValue="..."
-            />
-
             <TextField
               required
               id="outlined-required"
               label="Branch"
-              defaultValue="..."
+              placeholder='eg. CSE'
             />
-            
+
+          </div>
+
+          <div className={styles.detailSection3}>
+
+
+
+
+            <label For="dob">
+              D.O.B
             <input id="dob" type="date" />
+            </label>
+            
+            <TextField
+              required
+              id="outlined-required"
+              label="Hometown"
+              placeholder='eg. hyderabad'
+            />
 
           </div>
 
           <div className={styles.detailSection4}>
-          <Button variant="outlined">Submit</Button>
+            <Button variant="outlined">Submit</Button>
 
           </div>
         </div>
