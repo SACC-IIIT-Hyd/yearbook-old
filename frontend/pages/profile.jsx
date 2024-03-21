@@ -34,8 +34,17 @@ const user_details = () => {
     rollno: '',
     tagline: '',
     instagram: '',
+    linkedin: '',
     photo: '/dummyImage.png'
   });
+
+  useEffect(() => {
+    setUserDetails({
+      ...userDetails,
+      degree_type: degree
+    });
+  }, [degree]);
+
 
   useEffect(() => {
     fetch('http://localhost/api/profile', {
@@ -70,7 +79,7 @@ const user_details = () => {
           photo: data.photo
         });
         setSelectedImage(data.photo || "/dummyImage.png");
-        // console.log("User details: ", userDetails);
+        console.log("User details: ", userDetails);
         // console.log("Image: ", selectedImage);
       });
   }, [fetchProfile]);
@@ -204,7 +213,15 @@ const user_details = () => {
 
           </div>
 
-          <TextField id="standard-basic" label="Tagline" variant="standard" value="...." />
+          <TextField
+            required
+            id="nick_name"
+            label="Nickname"
+            value={userDetails.nick_name}
+            onChange={handleChange}
+            placeholder='@joey'
+          />
+
         </div>
 
         <div className={styles.detailsArea}>
@@ -218,6 +235,7 @@ const user_details = () => {
               }}
               variant="standard"
             />
+
             <TextField
               id="rollno"
               label="Roll No."
@@ -227,6 +245,9 @@ const user_details = () => {
               }}
               variant="standard"
             />
+          </div>
+
+          <div className={styles.detailSection5}>
             <TextField
               id="email1"
               label="College email"
@@ -235,91 +256,128 @@ const user_details = () => {
                 readOnly: true,
               }}
               variant="standard"
+              fullWidth
             />
 
-
-          </div>
-          <div className={styles.detailSection2}>
-            <TextField
-              required
-              id="nick_name"
-              label="Nickname"
-              value={userDetails.nick_name}
-              onChange={handleChange}
-            />
             <TextField
               required
               id="email2"
               label="Personal email"
+              fullWidth
               value={userDetails.email2}
               onChange={handleChange}
+              placeholder='joey.trib@friends.in'
             />
+
+          </div>
+
+
+          <div className={styles.detailSection2}>
             <TextField
               required
               id="phone"
               label="Whatsapp number"
               value={userDetails.phone}
               onChange={handleChange}
-            />
-            <TextField
-              id="hometown"
-              label="Home town"
-              value={userDetails.hometown}
-              onChange={handleChange}
+              placeholder='9876543210'
             />
 
-          </div>
-          <div className={styles.detailSection3}>
+            <TextField
+              id="instagram"
+              label="Instagram"
+              value={userDetails.instagram}
+              onChange={handleChange}
+              placeholder='itzjoey'
+            />
+
+            <TextField
+              id="linkedin"
+              label="LinkedIn"
+              value={userDetails.linkedin}
+              onChange={handleChange}
+              placeholder='itzjoey.official'
+            />
+
+
+            <TextField
+              sx={{ gridColumnStart: '1', gridColumnEnd: '4' }}
+              required
+              id="tagline"
+              label="Tagline"
+              fullWidth
+              value={userDetails.tagline}
+              onChange={handleChange}
+              placeholder="I'm cool"
+            />
+
+          </div >
+
+
+          <div className={styles.detailSection6}>
+            <TextField
+              required
+              id="join_year"
+              label="Year of joining"
+              value={userDetails.join_year}
+              onChange={handleChange}
+              placeholder='2020'
+            />
+
             <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
               <InputLabel id="degree_label">Degree</InputLabel>
               <Select
-                id="degree"
-                value={degree}
+                required
+                id="degree_type"
+                value={userDetails.degree_type}
                 label="Degree"
                 onChange={handleChangeDegree}
-                required
+                placeholder='Select an option'
               >
-
                 <MenuItem value={"BTech"}>BTech</MenuItem>
                 <MenuItem value={"BTech+MS"}>BTech+MS</MenuItem>
+                <MenuItem value={"MS"}>MS</MenuItem>
                 <MenuItem value={"MTech"}>MTech</MenuItem>
                 <MenuItem value={"PHD"}>PHD</MenuItem>
               </Select>
             </FormControl>
 
 
-
             <TextField
-              id="join_year"
               required
-              label="Year of joining"
-              value={userDetails.join_year}
-              onChange={handleChange}
-            />
-
-            <TextField
               id="branch"
-              required
               label="Branch"
               value={userDetails.branch}
+              placeholder='CSE'
               onChange={handleChange}
             />
+          </div >
 
-            <input id="dob" type="date" required value={userDetails.dob} onChange={handleChange} />
 
+          <div className={styles.detailSection3}>
+            <label htmlFor="dob">
+              Date of Birth
+              <input id="dob" type="date" required value={userDetails.dob} onChange={handleChange} />
+            </label>
+
+            <TextField
+              id="hometown"
+              label="Hometown"
+              value={userDetails.hometown}
+              onChange={handleChange}
+              placeholder='Hyderabad'
+            />
           </div>
 
           <div className={styles.detailSection4}>
             <Button variant="outlined" onClick={submitProfile}>Submit</Button>
+          </div >
+        </div >
 
-          </div>
-        </div>
-
-      </div>
-
+      </div >
 
 
-    </div>
+
+    </div >
   )
 }
 
