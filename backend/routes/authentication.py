@@ -6,6 +6,8 @@ from jwt import encode, decode
 from cas import CASClient
 from os import getenv
 
+from models.setup import db, User, ContactDetails, ProfileDetails, UserDetails, Media
+
 CAS_SERVER_URL = getenv("CAS_SERVER_URL")
 SERVICE_URL = getenv("SERVICE_URL")
 REDIRECT_URL = getenv("REDIRECT_URL", "/home")
@@ -76,7 +78,8 @@ def login():
         # Add CORS headers to the response
         response.headers.add('Access-Control-Allow-Origin', 'login.iiit.ac.in')
         response.headers.add('Access-Control-Allow-Headers', '*')
-        response.headers.add('Access-Control-Allow-Methods', 'GET POST')
+        response.headers.add('Access-Control-Allow-Methods',
+                             'GET POST PUT DELETE OPTIONS')
         response.headers.add('Access-Control-Allow-Credentials', 'true')
 
         print(response.headers)
@@ -124,6 +127,18 @@ def login():
             max_age=86400,  # 1 day
         )
         response.set_cookie("login", "true")
+
+        roll_no = payload["roll_no"]
+        contact = ContactDetails.query.get(roll_no)
+        if not contact:
+            contact = ContactDetails(
+                id=roll_no,
+                college_email=payload["email"],
+                # personal_email="",
+                # phone_number="",
+            )
+            db.session.add(contact)
+            db.session.commit()
 
         return response
 

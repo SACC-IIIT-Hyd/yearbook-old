@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from '../styles/profile.module.css';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -14,14 +14,63 @@ import { red } from '@mui/material/colors';
 
 const user_details = () => {
 
-  // code for choosing profile photo
-  // **********************************
   const inputRef = useRef(null);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [degree, setDegree] = useState('');
+  const { auth, fetchCookie } = Auth();
 
-  const handleButtonClick = () => {
-    inputRef.current.click();
-  };
+  const [userDetails, setUserDetails] = useState({
+    name: '',
+    email1: '',
+    email2: '',
+    phone: '',
+    hometown: '',
+    dob: '',
+    degree_type: '',
+    join_year: '',
+    nick_name: '',
+    branch: '',
+    rollno: '',
+    tagline: '',
+    insta: ''
+
+  });
+
+  useEffect(() => {
+    fetch('http://localhost/api/profile', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include'
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          console.log("Error in fetching user details");
+          return;
+        }
+
+        setUserDetails({
+
+          name: data.name,
+          email1: data.email1,
+          email2: data.email2,
+          phone: data.phone,
+          hometown: data.hometown,
+          dob: data.dob,
+          degree_type: data.degree_type,
+          join_year: data.join_year,
+          nick_name: data.nick_name,
+          branch: data.branch,
+          rollno: data.roll_no,
+          tagline: data.tagline,
+          insta: data.insta
+        });
+
+        console.log("User details: ", userDetails);
+      });
+  }, []);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -35,36 +84,70 @@ const user_details = () => {
       reader.readAsDataURL(file);
     }
   };
-  // ********************************************
-
-  // code for degree dropdown
-  // ************************************************ 
-  const [degree, setDegree] = React.useState('');
 
   const handleChangeDegree = (event) => {
     setDegree(event.target.value);
   };
-  // ****************************************************
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    console.log(id, value);
+    setUserDetails({
+      ...userDetails,
+      [id]: value
+    });
+    console.log(userDetails);
+  };
 
 
-  const { auth, fetchCookie } = Auth();
+  // const submitProfile = () => {
+  //   fetchCookie();
+
+  //   if (!auth) {
+  //     alert('Please login to submit profile');
+  //     return;
+  //   }
+
+  //   fetch('http://localhost/api/profile/add', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(userDetails),
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       console.log('Success:', data);
+  //       alert('Profile submitted successfully');
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error:', error);
+  //     });
+  // };
+
+  const handleButtonClick = () => {
+    inputRef.current.click();
+  };
+
 
   const submitProfile = () => {
+    console.log(user_details);
+
     // call useEffect of auth
-    fetchCookie()
+    // fetchCookie()
 
+    // console.log("submitting profile")
+    // console.log("auth: ", auth)
+
+    // if (!auth) {
+    //   // redirect to login
+    //   alert("Please login to submit profile")
+    //   return
+
+    // }
     console.log("submitting profile")
-    console.log("auth: ", auth)
-    
-    if (!auth) {
-      // redirect to login
-      alert("Please login to submit profile")
-      return
 
-    }
-    console.log("submitting profile")
-
-    fetch('http://localhost:3000/api/profile/add', {
+    fetch('http://localhost/api/profile/add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -93,6 +176,11 @@ const user_details = () => {
   }
 
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault
+  //   console.log(user_details)
+  // }
+
 
   return (
     <div className={styles.profilePage}>
@@ -117,7 +205,7 @@ const user_details = () => {
 
           </div>
 
-          <TextField id="standard-basic" label="Tagline" variant="standard" defaultValue="...." />
+          <TextField id="standard-basic" label="Tagline" variant="standard" value="...." />
 
 
 
@@ -126,27 +214,27 @@ const user_details = () => {
         <div className={styles.detailsArea}>
           <div className={styles.detailSection1}>
             <TextField
-              id="standard-read-only-input"
-              label="CAS NAME"
-              defaultValue="CAS NAME"
+              id="name"
+              label="Name"
+              value={userDetails.name}
               InputProps={{
                 readOnly: true,
               }}
               variant="standard"
             />
             <TextField
-              id="standard-read-only-input"
+              id="rollno"
               label="Roll No."
-              defaultValue="Roll No."
+              value={userDetails.rollno}
               InputProps={{
                 readOnly: true,
               }}
               variant="standard"
             />
             <TextField
-              id="standard-read-only-input"
+              id="email1"
               label="College email"
-              defaultValue="College email"
+              value={userDetails.email1}
               InputProps={{
                 readOnly: true,
               }}
@@ -158,36 +246,38 @@ const user_details = () => {
           <div className={styles.detailSection2}>
             <TextField
               required
-              id="outlined-required"
+              id="nick_name"
               label="Nickname"
-              defaultValue="..."
+              value={userDetails.nick_name}
+              onChange={handleChange}
             />
             <TextField
               required
-              id="outlined-required"
+              id="email2"
               label="Personal email"
-              defaultValue="..."
+              value={userDetails.email2}
+              onChange={handleChange}
             />
             <TextField
               required
-              id="outlined-required"
-              label="Whatsapp no."
-              defaultValue="..."
+              id="phone"
+              label="Whatsapp number"
+              value={userDetails.phone}
+              onChange={handleChange}
             />
             <TextField
-
-              id="outlined-required"
-              label="Alternate no."
-              defaultValue="..."
+              id="hometown"
+              label="Home town"
+              value={userDetails.hometown}
+              onChange={handleChange}
             />
 
           </div>
           <div className={styles.detailSection3}>
             <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-              <InputLabel id="demo-select-small-label">Degree</InputLabel>
+              <InputLabel id="degree_label">Degree</InputLabel>
               <Select
-                labelId="demo-select-small-label"
-                id="demo-select-small"
+                id="degree"
                 value={degree}
                 label="Degree"
                 onChange={handleChangeDegree}
@@ -204,20 +294,22 @@ const user_details = () => {
 
 
             <TextField
+              id="join_year"
               required
-              id="outlined-required"
               label="Year of joining"
-              defaultValue="..."
+              value={userDetails.join_year}
+              onChange={handleChange}
             />
 
             <TextField
+              id="branch"
               required
-              id="outlined-required"
               label="Branch"
-              defaultValue="..."
+              value={userDetails.branch}
+              onChange={handleChange}
             />
 
-            <input id="dob" type="date" />
+            <input id="dob" type="date" required value={userDetails.dob} onChange={handleChange} />
 
           </div>
 

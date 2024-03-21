@@ -22,6 +22,53 @@ def add_user():
         return jsonify({'error': str(e)})
 
 
+@main_user.route('/profile', methods=['GET'])
+@login_required
+def get_profile(current_user=None):
+    try:
+        if current_user:
+            print(current_user)
+            user = User.query.get(current_user['roll_no'])
+            if user is None:
+                return jsonify({'error': 'User not found'})
+            # return jsonify({'error': 'User not found'})
+
+            user_details = UserDetails.query.get(current_user['roll_no'])
+            contact_details = ContactDetails.query.get(current_user['roll_no'])
+
+            if user_details is None:
+                # empyt user details
+                user_details = UserDetails(id=current_user['roll_no'], dob="", type_of_degree="",
+                                           year_of_joining="", branch="", nick_name="", home_town="", tagline="")
+
+            if contact_details is None:
+                # empty contact details
+                contact_details = ContactDetails(id=current_user['roll_no'], college_email="",
+                                                 personal_email="", phone_number="")
+
+            profile_page = {
+                "name": user.first_name + " " + user.last_name,
+                "email1": contact_details.college_email if contact_details.college_email else "",
+                "email2": contact_details.personal_email if contact_details.personal_email else "",
+                "phone": contact_details.phone_number if contact_details.phone_number else "",
+                "hometown": user_details.home_town if user_details.home_town else "",
+                "dob": user_details.dob if user_details.dob else "",
+                "degree_type": user_details.type_of_degree if user_details.type_of_degree else "",
+                "join_year": user_details.year_of_joining if user_details.year_of_joining else "",
+                "branch": user_details.branch if user_details.branch else "",
+                "nick_name": user_details.nick_name if user_details.nick_name else "",
+                "tagline": user_details.tagline if user_details.tagline else "",
+                "roll_no": current_user['roll_no'],
+                "insta": contact_details. instagram if contact_details.instagram else ""
+            }
+
+            return jsonify(profile_page)
+
+        return jsonify({'error': 'User not found'})
+    except Exception as e:
+        return jsonify({'error': str(e)})
+
+
 @main_user.route('/profile/add', methods=['POST'])
 @login_required
 def add_details(current_user=None):
