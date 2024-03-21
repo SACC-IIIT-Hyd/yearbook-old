@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Link from 'next/link';
 
 import Box from '@mui/material/Box';
 
@@ -14,15 +14,17 @@ const navbar = () => {
     <Box sx={{ width: '100%',display:'flex',alignItems:'center',justifyContent:'space-evenly',backgroundColor:'#0b1120',borderBottom:'1px solid #1565c0'}}>
       <Stack sx={{minHeight:'4rem'}} direction='row' alignItems='center'justifyContent='space-evenly' >
         <img src="/logo.png" alt="logo" width='60px' />
-        <Typography variant='h3' color='white'>SACC</Typography> 
+        <Typography sx={{}}variant='h5' color='white'>SACC-IIIT H</Typography> 
       </Stack>
       <Stack>
       <ButtonGroup variant="contained" aria-label="Basic button group">
-      <Button>Home</Button>
-      <Button>Profile</Button>
-      <Button>About Me</Button>
-      <Button>Photo Wall</Button>
-      <Button>Testimonials</Button>
+      <Link href='/'><Button>Home</Button></Link>
+      <Link href='/aboutme'><Button>About Me</Button></Link>
+      <Link href='/photowall'><Button>Photo Wall</Button></Link>
+      <Link href='/Testimonials'><Button>Testimonials</Button></Link>
+      <Link href='/devs'><Button>Devs</Button></Link>
+      
+      
     </ButtonGroup>
 
       </Stack>

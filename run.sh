@@ -4,6 +4,6 @@
 # npm install
 # cd ..
 
-docker compose up --build
+docker-compose up --build
 
-docker compose down
+docker-compose down
