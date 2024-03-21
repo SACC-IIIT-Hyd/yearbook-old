@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styles from '../styles/about.module.css';
+import styles from '../styles/aboutme.module.css';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
