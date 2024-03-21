@@ -12,13 +12,18 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 const navbar = () => {
   return (
     <Box sx={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-evenly', backgroundColor: '#0b1120', borderBottom: '1px solid #1565c0' }}>
-      <Stack sx={{ minHeight: '4rem' }} direction='row' alignItems='center' justifyContent='space-evenly' >
-        <img src="/logo.png" alt="logo" width='60px' />
-        <Typography sx={{}} variant='h5' color='white'>SACC-IIIT H</Typography>
-      </Stack>
+      <Link href={"/"} style={{ textDecoration: "none" }}>
+        <Box>
+          <Stack sx={{ minHeight: '4rem' }} direction='row' alignItems='center' justifyContent='space-evenly' >
+            <img src="/logo.png" alt="logo" width='60px' />
+            <Typography variant='h5' color='white'>SACC-IIIT H</Typography>
+          </Stack>
+        </Box>
+      </Link>
       <Stack>
         <ButtonGroup variant="contained" aria-label="Basic button group">
           <Link href='/'><Button>Home</Button></Link>
+          <Link href='/profile'><Button>Profile</Button></Link>
           <Link href='/aboutme'><Button>About Me</Button></Link>
           <Link href='/photowall'><Button>Photo Wall</Button></Link>
           <Link href='/Testimonials'><Button>Testimonials</Button></Link>
@@ -29,10 +34,10 @@ const navbar = () => {
 
       </Stack>
       <Stack>
-        <Button variant="outlined">Log In</Button>
+        <a href='/api/login'> <Button variant="outlined" >Log In</Button></a>
       </Stack>
 
-    </Box>
+    </Box >
   )
 }
 
