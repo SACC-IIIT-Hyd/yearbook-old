@@ -14,16 +14,16 @@
 .aboutPage {
     padding: 1rem;
     height: 90%;
-    min-width:50rem;
+    min-width: 50rem;
     /* background-color:#0c2239; */
     /* border: 2px solid yellow; */
     overflow: auto;
 }
 
-.profileEdit{
+.profileEdit {
     position: absolute;
-    right:0;
-    top:0;
+    right: 0;
+    top: 0;
 }
 
 .profile {
@@ -31,7 +31,7 @@
     position: relative;
     font-family: poppins;
     /* color: #0ea5e9; */
-    color:white;
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -80,42 +80,42 @@
     align-items: center;
     margin-top: 1rem;
     min-height: 60%;
-    background-color:#0c2239;
+    background-color: #0c2239;
     border-radius: 23px;
-    padding:1.5rem;
+    padding: 1.5rem;
 }
 
 .queAns {
     /* color:#0ea5e9; */
-    border:1px solid white;
+    border: 1px solid white;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
     margin-top: 1rem;
     border-radius: 23px;
-    gap:1rem;
+    gap: 1rem;
     background-color: rgb(11, 17, 32);
     /* padding-bottom:2rem; */
     width: 90%;
     height: 20%;
-    margin:1rem;
+    margin: 1rem;
 }
 
-.queAns textarea{
-    color:white;
-    border:1px solid white;
+.queAns textarea {
+    color: white;
+    border: 1px solid white;
     /* border:1px solid #0ea5e9; */
-    width:100%;
-    border-radius:10px;
+    width: 100%;
+    border-radius: 10px;
     background-color: #0c2239;
     height: 7.5rem;
 }
 
 .que {
     font-weight: bolder;
-   /* color:#0ea5e9; */
-   color: white;
+    /* color:#0ea5e9; */
+    color: white;
     display: flex;
     align-items: center;
     /* justify-content: center; */
@@ -126,9 +126,9 @@
 }
 
 
-.extraQueArea{
+.extraQueArea {
     /* background-color: go; */
-    padding:1rem;
+    padding: 1rem;
     gap: 1rem;
     font-family: poppins;
     overflow: auto;
@@ -137,40 +137,41 @@
     align-items: center;
     margin-top: 1rem;
     min-height: 30%;
-    background-color:#0c2239;
+    background-color: #0c2239;
     border-radius: 23px;
 }
 
-.extraQueAns{
+.extraQueAns {
     background-color: rgb(11, 17, 32);
-    padding-left:2rem;
+    padding-left: 2rem;
     text-align: center;
     border-radius: 10px;
-    color:white;
-    display:flex;
+    color: white;
+    display: flex;
     align-items: center;
     justify-content: space-between;
-    height:33%;
-    width:90%;
+    height: 33%;
+    width: 90%;
     /* border:1px solid red; */
 }
 
-.extraQueAns textarea{
-    color:white;
+.extraQueAns textarea {
+    color: white;
     /* border:1px solid #0ea5e9; */
-    border:1px solid white;
-    width:80%;
-    border-radius:10px;
+    border: 1px solid white;
+    width: 80%;
+    border-radius: 10px;
     background-color: #0c2239;
-    height:100%;
+    height: 100%;
 }
-.extraQueAns span{
+
+.extraQueAns span {
     font-weight: bolder;
     /* color:#0ea5e9; */
     color: white;
 }
 
-.imageArea{
+.imageArea {
     /* color: yellow; */
     display: flex;
     align-items: center;
@@ -180,24 +181,24 @@
     /* background-color: #0c2239; */
     /* border:2px solid green; */
     /* border-radius: 23px; */
-   margin-top:1rem;
+    margin-top: 1rem;
 }
 
-.imageArea div{
+.imageArea div {
     /* color:yellow; */
 
     display: flex;
     align-items: center;
-    border-radius:10px;
-    margin-right:1rem;
+    border-radius: 10px;
+    margin-right: 1rem;
     justify-content: space-evenly;
-    height:100%;
-    width:30%;
-    background-color: #0c2239 ;
+    height: 100%;
+    width: 30%;
+    background-color: #0c2239;
 }
 
-.imageArea div img{
+.imageArea div img {
     /* color:yellow; */
 
-    width:10rem;
+    width: 10rem;
 }
