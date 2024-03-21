@@ -18,6 +18,7 @@ const user_details = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [degree, setDegree] = useState('');
   const { auth, fetchCookie } = Auth();
+  const [fetchProfile, setFetchProfile] = useState(false);
 
   const [userDetails, setUserDetails] = useState({
     name: '',
@@ -32,8 +33,8 @@ const user_details = () => {
     branch: '',
     rollno: '',
     tagline: '',
-    insta: ''
-
+    instagram: '',
+    photo: '/dummyImage.png'
   });
 
   useEffect(() => {
@@ -52,7 +53,6 @@ const user_details = () => {
         }
 
         setUserDetails({
-
           name: data.name,
           email1: data.email1,
           email2: data.email2,
@@ -65,12 +65,15 @@ const user_details = () => {
           branch: data.branch,
           rollno: data.roll_no,
           tagline: data.tagline,
-          insta: data.insta
+          instagram: data.instagram,
+          linkedin: data.linkedin,
+          photo: data.photo
         });
-
-        console.log("User details: ", userDetails);
+        setSelectedImage(data.photo || "/dummyImage.png");
+        // console.log("User details: ", userDetails);
+        // console.log("Image: ", selectedImage);
       });
-  }, []);
+  }, [fetchProfile]);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -78,6 +81,10 @@ const user_details = () => {
 
     reader.onload = () => {
       setSelectedImage(reader.result);
+      setUserDetails({
+        ...userDetails,
+        photo: reader.result
+      });
     };
 
     if (file) {
@@ -153,33 +160,25 @@ const user_details = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(
-        {
-          "email1": "amey.k@iiit.ac.in",
-          "email2": "amek@gmail.com",
-          "phone": "7904735718",
-          "home": "Cbe",
-          "dob": "2005-12-31",
-          "degree_type": "Btech",
-          "join_year": "2022",
-          "nick_name": "Minor",
-          "branch": "CSD"
-        }),
+        { ...userDetails, }),
     })
       .then(response => response.json())
       .then(data => {
-        console.log('Success:', data);
+        console.log('Uploaded:', data);
+
+        if (data.error) {
+          console.log("Error in submitting profile")
+          alert("Error in submitting profile")
+          return;
+        }
+
         alert("Profile submitted successfully")
+        setFetchProfile(!fetchProfile)
       })
       .catch((error) => {
         console.error('Error:', error);
       });
   }
-
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault
-  //   console.log(user_details)
-  // }
 
 
   return (
@@ -193,7 +192,7 @@ const user_details = () => {
 
         <div className={styles.photoArea}>
           <div className={styles.userPhoto}>
-            <img src={selectedImage || "/dummyImage.png"} alt="" style={{ maxWidth: '100%' }} />
+            <img src={selectedImage} alt="" style={{ maxWidth: '100%' }} />
             <input
               type="file"
               accept="image/*"
@@ -206,9 +205,6 @@ const user_details = () => {
           </div>
 
           <TextField id="standard-basic" label="Tagline" variant="standard" value="...." />
-
-
-
         </div>
 
         <div className={styles.detailsArea}>

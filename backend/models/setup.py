@@ -18,6 +18,7 @@ class ContactDetails(db.Model):
     phone_number = db.Column(db.String(20))
     # alternate_number = db.Column(db.String(20))
     instagram = db.Column(db.String(100))
+    linkedin = db.Column(db.String(100))
 
 
 class ProfileDetails(db.Model):
@@ -45,10 +46,11 @@ class UserDetails(db.Model):
 
 
 class Media(db.Model):
-    sacc_id = db.Column(db.String, db.ForeignKey('user.id'))
-    path = db.Column(db.String(50), primary_key=True)
+    id = db.Column(db.String, db.ForeignKey('user.id'), primary_key=True)
+    path = db.Column(db.String(50))
     # 1 - profile, 2 - group and 3 - photowall
     media_type = db.Column(db.Integer)
+    timestamp = db.Column(db.DateTime, primary_key=True)
 
 
 class Testimonials(db.Model):
