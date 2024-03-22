@@ -76,11 +76,12 @@ def login():
         response = redirect(cas_login_url)
 
         # Add CORS headers to the response
-        response.headers.add('Access-Control-Allow-Origin', 'login.iiit.ac.in')
-        response.headers.add('Access-Control-Allow-Headers', '*')
-        response.headers.add('Access-Control-Allow-Methods',
-                             'GET POST PUT DELETE OPTIONS')
-        response.headers.add('Access-Control-Allow-Credentials', 'true')
+        response.headers.add("Access-Control-Allow-Origin", "login.iiit.ac.in")
+        response.headers.add("Access-Control-Allow-Headers", "*")
+        response.headers.add(
+            "Access-Control-Allow-Methods", "GET POST PUT DELETE OPTIONS"
+        )
+        response.headers.add("Access-Control-Allow-Credentials", "true")
 
         print(response.headers)
         return response
@@ -145,8 +146,7 @@ def login():
 
 @blueprint.route("/logout")
 def logout():
-    redirect_url = url_for(
-        "api.authentication.logout_callback", _external=True)
+    redirect_url = url_for("api.authentication.logout_callback", _external=True)
     cas_logout_url = cas_client.get_logout_url(redirect_url)
     # app.debug("CAS logout URL: %s", cas_logout_url)
 

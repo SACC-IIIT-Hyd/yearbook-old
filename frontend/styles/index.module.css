@@ -1,187 +1,175 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 @font-face {
-    font-family: 'Gabriel_Weiss';
-    src: url('../public/fonts/GABRWFFR.ttf') format('truetype');
-    /* Add other font formats (woff, woff2) for cross-browser compatibility */
-    font-weight: normal;
-    font-style: normal;
+  font-family: "Gabriel_Weiss";
+  src: url("../public/fonts/GABRWFFR.ttf") format("truetype");
+  /* Add other font formats (woff, woff2) for cross-browser compatibility */
+  font-weight: normal;
+  font-style: normal;
 }
 
 .red {
-    color: rgb(227, 68, 38);
+  color: rgb(227, 68, 38);
 }
 
 .blue {
-    color: rgb(95, 164, 239);
+  color: rgb(95, 164, 239);
 }
 
 .yellow {
-    color: rgb(227, 185, 83);
+  color: rgb(227, 185, 83);
 }
 
-
-
 .main {
-    /* border:2px solid yellow; */
-    display: flex;
-    height: 95vh;
-    background-color: #0b1120;
+  /* border:2px solid yellow; */
+  display: flex;
+  height: 95vh;
+  background-color: #0b1120;
 }
 
 .mainContent {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 95vh;
-    width: 60vw;
-    /* border:2px solid yellow; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 95vh;
+  width: 60vw;
+  /* border:2px solid yellow; */
 }
 
 .sideImage {
-    height: 95vh;
-    width: 40vw;
-    /* border:2px solid green;  */
-    background: url('../public/bg1.jpg');
-    display: flex;
-    /* align-items: center; */
-    justify-content: center;
-
+  height: 95vh;
+  width: 40vw;
+  /* border:2px solid green;  */
+  background: url("../public/bg1.jpg");
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
 }
 
 .sideImage h1 {
-    color: #0b1120;
-    font-family: 'Gabriel_Weiss';
-    font-size: 7.5rem;
-    margin-top: 20%;
+  color: #0b1120;
+  font-family: "Gabriel_Weiss";
+  font-size: 7.5rem;
+  margin-top: 20%;
 }
 
-
-
 .content {
-
-    height: 80%;
-    width: 70%;
-    /* border:2px solid pink; */
+  height: 80%;
+  width: 70%;
+  /* border:2px solid pink; */
 }
 
 .content_head {
-    padding-left: 2rem;
-    color: white;
-    font-size: 3.5rem;
-    max-width: 50%;
-    height: 50%;
-    /* border:2px solid red; */
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-
+  padding-left: 2rem;
+  color: white;
+  font-size: 3.5rem;
+  max-width: 50%;
+  height: 50%;
+  /* border:2px solid red; */
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
 }
 
 .yearbook_text {
-    font-family: 'Gabriel_Weiss';
+  font-family: "Gabriel_Weiss";
 }
 
 .content_body {
-    display: flex;
-    align-items: center;
-    /* text-align: center; */
-    padding-left: 1rem;
-    justify-content: center;
-    height: 40%;
-    /* width:50%; */
-    /* border:2px solid blue; */
-    color: white;
-    font-family: Poppins;
-    font-size: 2rem;
-
+  display: flex;
+  align-items: center;
+  /* text-align: center; */
+  padding-left: 1rem;
+  justify-content: center;
+  height: 40%;
+  /* width:50%; */
+  /* border:2px solid blue; */
+  color: white;
+  font-family: Poppins;
+  font-size: 2rem;
 }
 
 .video_area {
-    background-color: #0b1120;
-    min-height: 70vh;
-    width: 100vw;
-    /* border:2px solid pink; */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
+  background-color: #0b1120;
+  min-height: 70vh;
+  width: 100vw;
+  /* border:2px solid pink; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .video_area h3 {
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-    font-size: 3rem;
-    color: #0ea5e9;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 3rem;
+  color: #0ea5e9;
 }
 
 .video_container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 23px;
-    min-height: 20rem;
-    width: max(40%, 40rem);
-    /* border: 2px solid red; */
-    box-shadow: 0px 3px 100px #0ea5e9;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 23px;
+  min-height: 20rem;
+  width: max(40%, 40rem);
+  /* border: 2px solid red; */
+  box-shadow: 0px 3px 100px #0ea5e9;
 }
 
 .video_container iframe {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 }
 
 .physicalbook_area {
-    /* border:2px solid whitesmoke; */
-    background-color: #0b1120;
-    min-height: 70vh;
-    width: 100vw;
-    /* border:2px solid pink; */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
+  /* border:2px solid whitesmoke; */
+  background-color: #0b1120;
+  min-height: 70vh;
+  width: 100vw;
+  /* border:2px solid pink; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .physicalbook_container {
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    border-radius: 23px;
-    min-height: 20rem;
-    width: max(40%, 40rem);
-    border: 2px solid #0ea5e9;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 23px;
+  min-height: 20rem;
+  width: max(40%, 40rem);
+  border: 2px solid #0ea5e9;
 }
 
 .physicalbook_container h3 {
-    font-size: 2rem;
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-
+  font-size: 2rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
 }
 
 .phyicalbook_container h5 {
-    font-size: 1.5rem;
-    font-family: "Poppins", sans-serif;
-    /* font-weight: 600; */
-    font-style: normal;
-
+  font-size: 1.5rem;
+  font-family: "Poppins", sans-serif;
+  /* font-weight: 600; */
+  font-style: normal;
 }
 
 .physicalbook_container button {
-    font-family: "Poppins", sans-serif;
-    border-radius: 23px;
-    padding: 1rem;
-    border: 2px solid #0ea5e9;
+  font-family: "Poppins", sans-serif;
+  border-radius: 23px;
+  padding: 1rem;
+  border: 2px solid #0ea5e9;
 }
 
 .physicalbook_container button:hover {
-    background-color: #0ea5e9;
-    color: white;
-
+  background-color: #0ea5e9;
+  color: white;
 }

@@ -2,8 +2,8 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 
-const Testimonial = ({children}: Readonly<{
-    children: React.ReactNode;
+const Testimonial = ({ children }: Readonly<{
+  children: React.ReactNode;
 }>) => {
   return (
     <div>

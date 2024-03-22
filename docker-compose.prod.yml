@@ -4,32 +4,32 @@ volumes:
     mysql-data:
 
 services:
-    # sql:
-    #     image: mysql:8.3
-    #     restart: unless-stopped
-    #     env_file:
-    #         - ./.env
-    #     volumes:
-    #         - mysql-data:/var/lib/mysql
-    #     # ports:
-    #     #     - 3306:3306
-    #     authentication-plugin: mysql_native_password
+    sql:
+        image: mysql:8.3
+        restart: unless-stopped
+        env_file:
+            - $YEARBOOK_CONFIG_PATH/.env
+        volumes:
+            - mysql-data:/var/lib/mysql
+        # ports:
+        #     - 3306:3306
+        authentication-plugin: mysql_native_password
     
     backend:
         build:
             context: ./backend
         env_file:
-            - ./.env
+            - $YEARBOOK_CONFIG_PATH/.env
         tty: true
-        # depends_on:
-        #     - sql
+        depends_on:
+            - sql
 
     frontend:
         build:
             context: ./frontend
             dockerfile: Dockerfile
         env_file:
-            - ./.env
+            - $YEARBOOK_CONFIG_PATH/.env
         tty: true
 
     nginx:
