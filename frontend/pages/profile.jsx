@@ -1,61 +1,58 @@
-import React, { useEffect, useRef, useState } from 'react';
-import styles from '../styles/profile.module.css';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import InputLabel from '@mui/material/InputLabel';
+import React, { useEffect, useRef, useState } from "react";
+import styles from "../styles/profile.module.css";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
 
-import Auth from '../src/auth';
-import { Link } from '@mui/material';
-import { red } from '@mui/material/colors';
-
+import Auth from "../src/auth";
+import { Link } from "@mui/material";
+import { red } from "@mui/material/colors";
 
 const user_details = () => {
-
   const inputRef = useRef(null);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [degree, setDegree] = useState('');
+  const [degree, setDegree] = useState("");
   const { auth, fetchCookie } = Auth();
   const [fetchProfile, setFetchProfile] = useState(false);
 
   const [userDetails, setUserDetails] = useState({
-    name: '',
-    email1: '',
-    email2: '',
-    phone: '',
-    hometown: '',
-    dob: '',
-    degree_type: '',
-    join_year: '',
-    nick_name: '',
-    branch: '',
-    rollno: '',
-    tagline: '',
-    instagram: '',
-    linkedin: '',
-    photo: '/dummyImage.png'
+    name: "",
+    email1: "",
+    email2: "",
+    phone: "",
+    hometown: "",
+    dob: "",
+    degree_type: "",
+    join_year: "",
+    nick_name: "",
+    branch: "",
+    rollno: "",
+    tagline: "",
+    instagram: "",
+    linkedin: "",
+    photo: "/dummyImage.png",
   });
 
   useEffect(() => {
     setUserDetails({
       ...userDetails,
-      degree_type: degree
+      degree_type: degree,
     });
   }, [degree]);
 
-
   useEffect(() => {
-    fetch('http://yearbook-sacc.iiit.ac.in/api/profile', {
-      method: 'GET',
+    fetch("/api/profile", {
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      credentials: 'include'
+      credentials: "include",
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         if (data.error) {
           console.log("Error in fetching user details");
           return;
@@ -76,7 +73,7 @@ const user_details = () => {
           tagline: data.tagline,
           instagram: data.instagram,
           linkedin: data.linkedin,
-          photo: data.photo
+          photo: data.photo,
         });
         setSelectedImage(data.photo || "/dummyImage.png");
         console.log("User details: ", userDetails);
@@ -92,7 +89,7 @@ const user_details = () => {
       setSelectedImage(reader.result);
       setUserDetails({
         ...userDetails,
-        photo: reader.result
+        photo: reader.result,
       });
     };
 
@@ -110,11 +107,10 @@ const user_details = () => {
     console.log(id, value);
     setUserDetails({
       ...userDetails,
-      [id]: value
+      [id]: value,
     });
     console.log(userDetails);
   };
-
 
   // const submitProfile = () => {
   //   fetchCookie();
@@ -145,7 +141,6 @@ const user_details = () => {
     inputRef.current.click();
   };
 
-
   const submitProfile = () => {
     console.log(user_details);
 
@@ -161,56 +156,51 @@ const user_details = () => {
     //   return
 
     // }
-    console.log("submitting profile")
+    console.log("submitting profile");
 
-    fetch('http://yearbook-sacc.iiit.ac.in/api/profile/add', {
-      method: 'POST',
+    fetch("/api/profile/add", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(
-        { ...userDetails, }),
+      body: JSON.stringify({ ...userDetails }),
     })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Uploaded:', data);
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Uploaded:", data);
 
         if (data.error) {
-          console.log("Error in submitting profile")
-          alert("Error in submitting profile")
+          console.log("Error in submitting profile");
+          alert("Error in submitting profile");
           return;
         }
 
-        alert("Profile submitted successfully")
-        setFetchProfile(!fetchProfile)
+        alert("Profile submitted successfully");
+        setFetchProfile(!fetchProfile);
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
-  }
-
+  };
 
   return (
     <div className={styles.profilePage}>
-
       <div className={styles.profilePageHead}>
         <h1>Yearbook Profile</h1>
         <h3>Open Your Yearbook Account with Us</h3>
       </div>
       <div className={styles.profilePageBody}>
-
         <div className={styles.photoArea}>
           <div className={styles.userPhoto}>
-            <img src={selectedImage} alt="" style={{ maxWidth: '100%' }} />
+            <img src={selectedImage} alt="" style={{ maxWidth: "100%" }} />
             <input
               type="file"
               accept="image/*"
               ref={inputRef}
-              style={{ display: 'none' }}
+              style={{ display: "none" }}
               onChange={handleFileChange}
             />
             <button onClick={handleButtonClick}>+</button>
-
           </div>
 
           <TextField
@@ -219,9 +209,8 @@ const user_details = () => {
             label="Nickname"
             value={userDetails.nick_name}
             onChange={handleChange}
-            placeholder='@joey'
+            placeholder="@joey"
           />
-
         </div>
 
         <div className={styles.detailsArea}>
@@ -266,11 +255,9 @@ const user_details = () => {
               fullWidth
               value={userDetails.email2}
               onChange={handleChange}
-              placeholder='joey.trib@friends.in'
+              placeholder="joey.trib@friends.in"
             />
-
           </div>
-
 
           <div className={styles.detailSection2}>
             <TextField
@@ -279,7 +266,7 @@ const user_details = () => {
               label="Whatsapp number"
               value={userDetails.phone}
               onChange={handleChange}
-              placeholder='9876543210'
+              placeholder="9876543210"
             />
 
             <TextField
@@ -287,7 +274,7 @@ const user_details = () => {
               label="Instagram"
               value={userDetails.instagram}
               onChange={handleChange}
-              placeholder='itzjoey'
+              placeholder="itzjoey"
             />
 
             <TextField
@@ -295,12 +282,11 @@ const user_details = () => {
               label="LinkedIn"
               value={userDetails.linkedin}
               onChange={handleChange}
-              placeholder='itzjoey.official'
+              placeholder="itzjoey.official"
             />
 
-
             <TextField
-              sx={{ gridColumnStart: '1', gridColumnEnd: '4' }}
+              sx={{ gridColumnStart: "1", gridColumnEnd: "4" }}
               required
               id="tagline"
               label="Tagline"
@@ -309,9 +295,7 @@ const user_details = () => {
               onChange={handleChange}
               placeholder="I'm cool"
             />
-
-          </div >
-
+          </div>
 
           <div className={styles.detailSection6}>
             <TextField
@@ -320,7 +304,7 @@ const user_details = () => {
               label="Year of joining"
               value={userDetails.join_year}
               onChange={handleChange}
-              placeholder='2020'
+              placeholder="2020"
             />
 
             <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
@@ -331,7 +315,7 @@ const user_details = () => {
                 value={userDetails.degree_type}
                 label="Degree"
                 onChange={handleChangeDegree}
-                placeholder='Select an option'
+                placeholder="Select an option"
               >
                 <MenuItem value={"BTech"}>BTech</MenuItem>
                 <MenuItem value={"BTech+MS"}>BTech+MS</MenuItem>
@@ -341,22 +325,26 @@ const user_details = () => {
               </Select>
             </FormControl>
 
-
             <TextField
               required
               id="branch"
               label="Branch"
               value={userDetails.branch}
-              placeholder='CSE'
+              placeholder="CSE"
               onChange={handleChange}
             />
-          </div >
-
+          </div>
 
           <div className={styles.detailSection3}>
             <label htmlFor="dob">
               Date of Birth
-              <input id="dob" type="date" required value={userDetails.dob} onChange={handleChange} />
+              <input
+                id="dob"
+                type="date"
+                required
+                value={userDetails.dob}
+                onChange={handleChange}
+              />
             </label>
 
             <TextField
@@ -364,21 +352,19 @@ const user_details = () => {
               label="Hometown"
               value={userDetails.hometown}
               onChange={handleChange}
-              placeholder='Hyderabad'
+              placeholder="Hyderabad"
             />
           </div>
 
           <div className={styles.detailSection4}>
-            <Button variant="outlined" onClick={submitProfile}>Submit</Button>
-          </div >
-        </div >
+            <Button variant="outlined" onClick={submitProfile}>
+              Submit
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-      </div >
-
-
-
-    </div >
-  )
-}
-
-export default user_details
+export default user_details;

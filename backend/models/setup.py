@@ -12,7 +12,7 @@ class User(db.Model):
 
 
 class ContactDetails(db.Model):
-    id = db.Column(db.String, db.ForeignKey('user.id'), primary_key=True)
+    id = db.Column(db.String, db.ForeignKey("user.id"), primary_key=True)
     college_email = db.Column(db.String(120))
     personal_email = db.Column(db.String(120))
     phone_number = db.Column(db.String(20))
@@ -22,7 +22,7 @@ class ContactDetails(db.Model):
 
 
 class ProfileDetails(db.Model):
-    id = db.Column(db.String, db.ForeignKey('user.id'), primary_key=True)
+    id = db.Column(db.String, db.ForeignKey("user.id"), primary_key=True)
     q1 = db.Column(db.String(500))
     q2 = db.Column(db.String(500))
     q3 = db.Column(db.String(500))
@@ -35,7 +35,7 @@ class ProfileDetails(db.Model):
 
 
 class UserDetails(db.Model):
-    id = db.Column(db.String, db.ForeignKey('user.id'), primary_key=True)
+    id = db.Column(db.String, db.ForeignKey("user.id"), primary_key=True)
     dob = db.Column(db.Date)
     type_of_degree = db.Column(db.String(50))
     year_of_joining = db.Column(db.String(20))
@@ -46,7 +46,7 @@ class UserDetails(db.Model):
 
 
 class Media(db.Model):
-    id = db.Column(db.String, db.ForeignKey('user.id'), primary_key=True)
+    id = db.Column(db.String, db.ForeignKey("user.id"), primary_key=True)
     path = db.Column(db.String(50))
     # 1 - profile, 2 - group and 3 - photowall
     media_type = db.Column(db.Integer)
@@ -55,8 +55,8 @@ class Media(db.Model):
 
 class Testimonials(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    from_id = db.Column(db.String, db.ForeignKey('user.id'))
-    to_id = db.Column(db.String, db.ForeignKey('user.id'))
+    from_id = db.Column(db.String, db.ForeignKey("user.id"))
+    to_id = db.Column(db.String, db.ForeignKey("user.id"))
     text = db.Column(db.String(500))
     date_created = db.Column(db.DateTime)
     last_updated = db.Column(db.DateTime)
@@ -69,15 +69,13 @@ class Questions(db.Model):
 
 
 class Response(db.Model):
-    qid = db.Column(db.Integer, db.ForeignKey(
-        'questions.qid'), primary_key=True)
-    sacc_id = db.Column(db.String, db.ForeignKey('user.id'), primary_key=True)
-    response_id = db.Column(
-        db.String, db.ForeignKey('user.id'), primary_key=True)
+    qid = db.Column(db.Integer, db.ForeignKey("questions.qid"), primary_key=True)
+    sacc_id = db.Column(db.String, db.ForeignKey("user.id"), primary_key=True)
+    response_id = db.Column(db.String, db.ForeignKey("user.id"), primary_key=True)
 
 
 class Suggestions(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    sacc_id = db.Column(db.String, db.ForeignKey('user.id'))
+    sacc_id = db.Column(db.String, db.ForeignKey("user.id"))
     test = db.Column(db.String(500))
     page = db.Column(db.Integer)
