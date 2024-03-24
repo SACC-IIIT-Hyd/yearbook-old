@@ -1,0 +1,37 @@
+@font-face {
+    font-family: "ProtestRiot";
+    src: url("/fonts/ProtestRiot.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: "GabrielWeiss";
+  src: url("/GABRWFFR.TTF") format("truetype");
+}
+
+@font-face {
+  font-family: 'anona'; /* Give your font a name */
+  src: url('/anona.otf') format('truetype'); /* Specify the path to your font file */
+  /* You can also include additional font formats for better browser compatibility */
+}
+
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: #0C0018
+}
