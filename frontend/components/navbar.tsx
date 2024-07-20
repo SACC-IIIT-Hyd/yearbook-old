@@ -27,6 +27,7 @@ const navbar = () => {
           <Link href='/aboutme'><Button>About Me</Button></Link>
           <Link href='/photowall'><Button>Photo Wall</Button></Link>
           <Link href='/Testimonials'><Button>Testimonials</Button></Link>
+          <Link href='/pastYearbooks'><Button>Past Yearbooks</Button></Link>
           <Link href='/devs'><Button>Devs</Button></Link>
 
 
