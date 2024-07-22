@@ -14,16 +14,23 @@
     "@fontsource/roboto": "^5.0.12",
     "@mui/icons-material": "^5.15.14",
     "@mui/material": "^5.15.14",
-    "next": "^14.1.4",
+    "@types/pdfjs-dist": "^2.10.377",
+    "@wojtekmaj/react-hooks": "^1.20.0",
+    "next": "^14.2.0",
+    "pdfjs-dist": "^4.4.168",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-pdf": "^9.1.0"
   },
   "devDependencies": {
-    "@types/node": "^20.11.30",
-    "@types/react": "^18.2.67",
+    "@types/node": "^20.14.11",
+    "@types/react": "^18.3.3",
     "@types/react-dom": "^18.2.22",
     "eslint": "8.57.0",
     "eslint-config-next": "14.1.1",
-    "typescript": "^5.4.3"
+    "typescript": "^5.5.3"
+  },
+  "engines": {
+    "node": ">=22.0.0"
   }
 }

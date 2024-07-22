@@ -1,0 +1,24 @@
+.pdfViewer {
+  display: none;
+}
+
+.pdfContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.navigationButtons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pageNumberInput {
+  width: 30px;
+  text-align: center;
+  appearance: 'textfield';
+  -moz-appearance: 'textfield';
+  -webkit-appearance: none;
+}
