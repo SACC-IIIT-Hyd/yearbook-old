@@ -5,11 +5,16 @@ import env from "./env"
 export default async function fetchImages(url: string):
 Promise<ImagesResults | undefined>{
     try{
+        if (!env.PEXELS_API_KEY) {
+            throw new Error("PEXELS_API_KEY is not defined");
+        }
+
         const res = await fetch(url, {
             headers: {
                 Authorization: env.PEXELS_API_KEY,
-            }
-        })
+            },
+        });
+
 
         if (!res.ok) {
             throw new Error("Failed to fetch images\n")

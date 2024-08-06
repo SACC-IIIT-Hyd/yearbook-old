@@ -1,4 +1,4 @@
-import Gallery from "@/app/components/Gallery"
+import Gallery from "../../components/Gallery"
 import { Container, Typography } from '@mui/material';
 
 type Props = {

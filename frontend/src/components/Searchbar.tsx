@@ -4,29 +4,32 @@ import { useDropzone } from 'react-dropzone';
 import { Button, Box, Typography, List, ListItem, Modal } from '@mui/material';
 
 export default function Searchbar() {
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState<File[]>([]);
   const [showPopup, setShowPopup] = useState(false);
-  const [uploadedFile, setUploadedFile] = useState(null);
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
 
   const openPopup = () => setShowPopup(true);
   const closePopup = () => setShowPopup(false);
 
   const handleConfirm = () => {
-    console.log('Uploaded Image Details:', uploadedFile); // Log details to console
+    // console.log('Uploaded Image Details:', uploadedFile); 
     setFiles([]); // Reset files array
     setUploadedFile(null); // Reset uploaded file
     closePopup();
   };
 
-  const handleNewImageUpload = (acceptedFiles) => {
+  const handleNewImageUpload = (acceptedFiles: File[]) => {
     const newFile = acceptedFiles[0];
     setFiles([newFile]); // Update displayed files list
     setUploadedFile(newFile); // Update uploaded file state
-    console.log('New Image Details:', newFile); // Log new image details
+    // console.log('New Image Details:', newFile); // Log new image details
   };
 
   const { getRootProps, getInputProps, open } = useDropzone({
-    accept: 'image/jpeg, image/png', // Allow JPEG and PNG images
+    accept: {
+      'image/jpeg': [],
+      'image/png': []
+    }, // Allow JPEG and PNG images
     onDrop: handleNewImageUpload, // Handle new image upload within popup
     noClick: true, // Disables click events on the dropzone
     noKeyboard: true, // Disables keyboard events on the dropzone
@@ -67,8 +70,8 @@ export default function Searchbar() {
                 </Box>
             )}
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white', textAlign: "center" }}>
-                <Typography variant="h4">Files</Typography>
-                <List>{files.map((file) => <ListItem key={file.path}>{file.path} - {file.size} bytes</ListItem>)}</List>
+              <Typography variant="h4">Files</Typography>
+              <List>{files.map((file) => <ListItem key={file.name}>{file.name} - {file.size} bytes</ListItem>)}</List>
             </Box>
             {uploadedFile && (
                 <Button onClick={handleConfirm} style={{color: 'white'}}>Confirm</Button>

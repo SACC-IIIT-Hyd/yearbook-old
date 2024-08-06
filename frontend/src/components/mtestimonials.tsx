@@ -47,11 +47,11 @@ const BasicCard = () => {
 
   const [isDropCalled, setIsDropCalled] = React.useState(false);
 
-  const handleDragStart = (e, cardId) => {
-    e.dataTransfer.setData('text/plain', cardId);
+  const handleDragStart = (e: React.DragEvent<HTMLDivElement>, cardId: number) => {
+    e.dataTransfer.setData('text/plain', cardId.toString());
   };
 
-  const handleDrop = (e, dropIndex) => {
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>, dropIndex: number) => {
     e.stopPropagation();
 
     const draggedId = e.dataTransfer.getData('text/plain');
@@ -70,7 +70,7 @@ const BasicCard = () => {
     setIsDropCalled(true);
   };
 
-  const handleDragOver = (e) => {
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
   };
 

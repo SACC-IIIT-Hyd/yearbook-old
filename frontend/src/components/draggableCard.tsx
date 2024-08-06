@@ -5,9 +5,9 @@ import { Card, CardContent, Typography } from '@mui/material';
 interface coms {
     title: string;
     content: string;
-    onDragStart: (e: React.DragEvent) => void;
-    onDrop: (e: React.DragEvent) => void;
-    onDragOver: (e: React.DragEvent) => void;
+    onDragStart: (e: React.DragEvent<HTMLDivElement>) => void;
+  onDrop: (e: React.DragEvent<HTMLDivElement>) => void;
+  onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
 }
 
 const DraggableCard: React.FC<coms> = ({ title, content, onDragStart, onDrop, onDragOver }) => {
@@ -22,7 +22,7 @@ const DraggableCard: React.FC<coms> = ({ title, content, onDragStart, onDrop, on
     border: "1px solid #8633be",}}
     draggable onDragStart={onDragStart} onDrop={onDrop} onDragOver={onDragOver}>
       <CardContent sx={{ minHeight:"15rem",  display: 'flex', flexDirection: 'column', padding:"3%", paddingTop:"0", wordWrap:"break-word"}}>
-        <img src="./pin.png" style={{ height: '80px', maxWidth: "50px", marginLeft: "auto", marginBottom:"0", paddingBottom:"0", opacity: "0.5"}} />
+        <img src="./pin.png" style={{ height: '80px', maxWidth: "50px", marginLeft: "auto", marginBottom:"0", paddingBottom:"0"}} />
       <p>
         {content}
       </p>
