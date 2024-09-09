@@ -2,7 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-
+# Profile details from CAS
 class User(db.Model):
     id = db.Column(db.String, primary_key=True)
     first_name = db.Column(db.String(80))
@@ -10,7 +10,7 @@ class User(db.Model):
     # user_type = db.Column(db.String(20))
     profile_created = db.Column(db.Boolean, default=False)
 
-
+# Profile Contact Details
 class ContactDetails(db.Model):
     id = db.Column(db.String, db.ForeignKey('user.id'), primary_key=True)
     college_email = db.Column(db.String(120))
@@ -20,7 +20,18 @@ class ContactDetails(db.Model):
     instagram = db.Column(db.String(100))
     linkedin = db.Column(db.String(100))
 
+# Other Profile Details
+class UserDetails(db.Model):
+    id = db.Column(db.String, db.ForeignKey('user.id'), primary_key=True)
+    dob = db.Column(db.Date)
+    type_of_degree = db.Column(db.String(50))
+    year_of_joining = db.Column(db.String(20))
+    branch = db.Column(db.String(50))
+    nick_name = db.Column(db.String(80))
+    tagline = db.Column(db.String(500))
+    home_town = db.Column(db.String(50))
 
+# About Me Details (Questions are hardcoded, only responses are stored in the DB)
 class ProfileDetails(db.Model):
     id = db.Column(db.String, db.ForeignKey('user.id'), primary_key=True)
     q1 = db.Column(db.String(500))
@@ -33,18 +44,7 @@ class ProfileDetails(db.Model):
     clubs = db.Column(db.String(500))
     achievements = db.Column(db.String(500))
 
-
-class UserDetails(db.Model):
-    id = db.Column(db.String, db.ForeignKey('user.id'), primary_key=True)
-    dob = db.Column(db.Date)
-    type_of_degree = db.Column(db.String(50))
-    year_of_joining = db.Column(db.String(20))
-    branch = db.Column(db.String(50))
-    nick_name = db.Column(db.String(80))
-    tagline = db.Column(db.String(500))
-    home_town = db.Column(db.String(50))
-
-
+# Photowall + PFP & Group Pictures
 class Media(db.Model):
     id = db.Column(db.String, db.ForeignKey('user.id'), primary_key=True)
     path = db.Column(db.String(50))
@@ -52,7 +52,7 @@ class Media(db.Model):
     media_type = db.Column(db.Integer)
     timestamp = db.Column(db.DateTime, primary_key=True)
 
-
+# Testimonials
 class Testimonials(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     from_id = db.Column(db.String, db.ForeignKey('user.id'))
@@ -62,12 +62,12 @@ class Testimonials(db.Model):
     last_updated = db.Column(db.DateTime)
     preference_number = db.Column(db.Integer)
 
-
+# Poll Questions
 class Questions(db.Model):
     qid = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(500))
 
-
+# Poll Responses
 class Response(db.Model):
     qid = db.Column(db.Integer, db.ForeignKey(
         'questions.qid'), primary_key=True)
@@ -75,7 +75,7 @@ class Response(db.Model):
     response_id = db.Column(
         db.String, db.ForeignKey('user.id'), primary_key=True)
 
-
+# Suggestions (Not yet on frontend)
 class Suggestions(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     sacc_id = db.Column(db.String, db.ForeignKey('user.id'))
